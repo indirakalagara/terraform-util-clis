@@ -1,11 +1,22 @@
 id: github.com/cloud-native-toolkit/terraform-util-clis
-name: ""
+name: util-clis
 type: terraform
-description: ""
+description: Module to install clis into local bin directory
 tags:
   - tools
-  - devops
+  - util
+  - cli
+  - yq
+  - jq
+  - igc
 versions:
+  - platforms: []
+    dependencies: []
+    variables: [{name: bin_dir, type: string, description: The directory where the clis should be downloaded. If not provided will default to ./bin, default: "", optional: true}]
+    version: v1.0.0
+    outputs:
+      - name: bin_dir
+        description: Directory where the clis were downloaded
   - platforms:
       - kubernetes
       - ocp3
@@ -27,28 +38,3 @@ versions:
     #          version: ">= 1.6.0"
     variables: []
     version: v0.0.0
-#    - name: cluster_type
-#      moduleRef:
-#        id: cluster
-#        output: type_code
-#    - name: cluster_ingress_hostname
-#      moduleRef:
-#        id: cluster
-#        output: ingress_hostname
-#    - name: cluster_config_file
-#      moduleRef:
-#        id: cluster
-#        output: config_file_path
-#    - name: tls_secret_name
-#      moduleRef:
-#        id: cluster
-#        output: tls_secret_name
-#    - name: releases_namespace
-#      moduleRef:
-#        id: namespace
-#        output: name
-#        discriminator: tools
-#    - name: icon_url
-#      moduleRef:
-#        id: dashboard
-#        output: base_icon_url
