@@ -1,6 +1,6 @@
 
 locals {
-  bin_dir = var.bin_dir != "" ? var.bin_dir : "${path.cwd}/bin"
+  bin_dir = var.bin_dir != "" ? var.bin_dir : "${path.cwd}/bin2"
 }
 
 resource null_resource setup-binaries {
