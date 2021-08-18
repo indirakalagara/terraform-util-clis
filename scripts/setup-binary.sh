@@ -32,8 +32,12 @@ else
 
     curl -sLo "${BIN_DIR}/${CLI_NAME}.tmp" "${CLI_URL}"
 
-    chmod +x "${BIN_DIR}/${CLI_NAME}.tmp"
-    mv "${BIN_DIR}/${CLI_NAME}.tmp" "${BIN_DIR}/${CLI_NAME}"
+    if [[ ! -f "${BIN_DIR}/${CLI_NAME}" ]]; then
+      cp "${BIN_DIR}/${CLI_NAME}.tmp" "${BIN_DIR}/${CLI_NAME}"
+    fi
+
+    rm "${BIN_DIR}/${CLI_NAME}.tmp"
+    chmod +x "${BIN_DIR}/${CLI_NAME}"
   fi
 
   COMMAND="${BIN_DIR}/${CLI_NAME}"
