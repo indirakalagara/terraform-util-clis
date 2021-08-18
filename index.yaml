@@ -13,6 +13,13 @@ versions:
   - platforms: []
     dependencies: []
     variables: [{name: bin_dir, type: string, description: The directory where the clis should be downloaded. If not provided will default to ./bin, default: "", optional: true}]
+    version: v1.0.2
+    outputs:
+      - name: bin_dir
+        description: Directory where the clis were downloaded
+  - platforms: []
+    dependencies: []
+    variables: [{name: bin_dir, type: string, description: The directory where the clis should be downloaded. If not provided will default to ./bin, default: "", optional: true}]
     version: v1.0.1
     outputs:
       - name: bin_dir
