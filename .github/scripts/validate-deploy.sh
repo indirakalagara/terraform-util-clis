@@ -28,3 +28,8 @@ if [[ ! -f "${BIN_DIR}/helm" ]]; then
   echo "helm not found"
   exit 1
 fi
+
+if ! "${BIN_DIR}/helm" version; then
+  echo "helm cli not configured properly"
+  exit 1
+fi
