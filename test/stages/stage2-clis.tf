@@ -1,5 +1,7 @@
 module "clis" {
   source = "./module"
+
+  clis = ["yq", "jq", "igc", "helm"]
 }
 
 resource null_resource write_path {

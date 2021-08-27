@@ -3,6 +3,7 @@
 DEST_DIR="$1"
 CLI_NAME="$2"
 CLI_URL="$3"
+CLI_PATH="$4"
 
 mkdir -p "${DEST_DIR}"
 
@@ -20,25 +21,27 @@ if [[ -n "${COMMAND}" ]]; then
   ln -s "${COMMAND}" "${BIN_DIR}/${CLI_NAME}"
   COMMAND="${BIN_DIR}/${CLI_NAME}"
 else
-  TMP_FILE="${BIN_DIR}/${CLI_NAME}.tmp"
+  TAR_FILE="${BIN_DIR}/${CLI_NAME}.tgz"
 
-  if [[ -f "${TMP_FILE}" ]]; then
+  if [[ -f "${TAR_FILE}" ]]; then
     echo "${CLI_NAME} is already being installed. Waiting..."
 
-    while [[ -f "${TMP_FILE}" ]]; do
+    while [[ -f "${TAR_FILE}" ]]; do
       sleep 10
     done
   else
     echo "${CLI_NAME} missing. Installing..."
-    touch "${TMP_FILE}"
+    touch "${TAR_FILE}"
 
-    curl -sLo "${TMP_FILE}" "${CLI_URL}"
+    curl -sLo "${TAR_FILE}" "${CLI_URL}"
 
     if [[ ! -f "${BIN_DIR}/${CLI_NAME}" ]]; then
-      cp "${TMP_FILE}" "${BIN_DIR}/${CLI_NAME}"
+      tar xzf "${TAR_FILE}" "${CLI_PATH}"
+      cp "${CLI_PATH}" "${BIN_DIR}/${CLI_NAME}"
+      rm "${CLI_PATH}"
     fi
 
-    rm "${TMP_FILE}"
+    rm "${TAR_FILE}"
     chmod +x "${BIN_DIR}/${CLI_NAME}"
   fi
 

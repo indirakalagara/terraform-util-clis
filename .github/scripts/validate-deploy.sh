@@ -23,3 +23,8 @@ if [[ ! -f "${BIN_DIR}/igc" ]]; then
   echo "igc not found"
   exit 1
 fi
+
+if [[ ! -f "${BIN_DIR}/helm" ]]; then
+  echo "helm not found"
+  exit 1
+fi

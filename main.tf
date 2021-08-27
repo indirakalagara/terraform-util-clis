@@ -9,6 +9,6 @@ resource null_resource setup-binaries {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/setup-binaries.sh '${local.bin_dir}'"
+    command = "${path.module}/scripts/setup-binaries.sh '${local.bin_dir}' '${join(",", var.clis)}'"
   }
 }
