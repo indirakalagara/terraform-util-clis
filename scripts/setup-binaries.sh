@@ -21,3 +21,7 @@ fi
 if [[ "${CLIS}" =~ helm ]]; then
   "${SCRIPT_DIR}/setup-helm.sh" "${DEST_DIR}" || exit 1
 fi
+
+if [[ "${CLIS}" =~ argocd ]]; then
+  "${SCRIPT_DIR}/setup-argocd.sh" "${DEST_DIR}" || exit 1
+fi

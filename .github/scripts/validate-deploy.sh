@@ -29,6 +29,11 @@ if [[ ! -f "${BIN_DIR}/helm" ]]; then
   exit 1
 fi
 
+if [[ ! -f "${BIN_DIR}/argocd" ]]; then
+  echo "argocd not found"
+  exit 1
+fi
+
 if ! "${BIN_DIR}/helm" version; then
   echo "helm cli not configured properly"
   exit 1
