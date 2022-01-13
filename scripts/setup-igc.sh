@@ -3,19 +3,7 @@
 SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 DEST_DIR="$1"
-
-OSTYPE=$(uname)
-if [[ "$OSTYPE" == "Linux" ]]; then
-  TYPE=$(cat /etc/os-release | grep -E "^ID=" | sed "s/ID=//g")
-  if [[ "${TYPE}" != "alpine" ]]; then
-    TYPE="linux"
-  fi
-elif [[ "$OSTYPE" == "Darwin" ]]; then
-  TYPE="macos"
-else
-  echo "OS not supported"
-  exit 1
-fi
+TYPE="$2"
 
 if [[ -f "${DEST_DIR}/.igc-release" ]]; then
   RELEASE=$(cat "${DEST_DIR}/.igc-release")
