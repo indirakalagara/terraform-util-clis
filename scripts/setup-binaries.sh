@@ -41,3 +41,7 @@ fi
 if [[ "${CLIS}" =~ argocd ]]; then
   "${SCRIPT_DIR}/setup-argocd.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
+
+if [[ "${CLIS}" =~ rosa ]]; then
+  "${SCRIPT_DIR}/setup-rosa.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
