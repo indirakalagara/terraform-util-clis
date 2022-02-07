@@ -21,9 +21,7 @@ fi
 
 echo "*** Identified OS: ${TYPE}"
 
-if [[ "${CLIS}" =~ jq ]]; then
-  "${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" || exit 1
-fi
+"${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 
 if [[ "${CLIS}" =~ igc ]]; then
   "${SCRIPT_DIR}/setup-igc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
@@ -44,4 +42,12 @@ fi
 
 if [[ "${CLIS}" =~ rosa ]]; then
   "${SCRIPT_DIR}/setup-rosa.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
+
+if [[ "${CLIS}" =~ gh ]]; then
+  "${SCRIPT_DIR}/setup-gh.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
+
+if [[ "${CLIS}" =~ glab ]]; then
+  "${SCRIPT_DIR}/setup-glab.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi

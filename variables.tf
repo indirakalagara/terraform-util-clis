@@ -6,6 +6,6 @@ variable "bin_dir" {
 
 variable "clis" {
   type        = list(string)
-  description = "The list of clis that should be made available in the bin directory. Supported values are yq, jq, igc, helm, and argocd. (If not provided the list will default to yq, jq, and igc)"
+  description = "The list of clis that should be made available in the bin directory. Supported values are yq, jq, igc, helm, argocd, rosa, gh, and glab. (If not provided the list will default to yq, jq, and igc)"
   default     = ["yq", "jq", "igc"]
 }
