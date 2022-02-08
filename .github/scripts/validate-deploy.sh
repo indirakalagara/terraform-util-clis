@@ -38,11 +38,11 @@ if ! "${BIN_DIR}/helm" version; then
   echo "helm cli not configured properly"
   exit 1
 fi
-#
-#if ! "${BIN_DIR}/rosa" version; then
-#  echo "rosa cli not configured properly"
-#  exit 1
-#fi
+
+if ! "${BIN_DIR}/rosa" version; then
+ echo "rosa cli not configured properly"
+ exit 1
+fi
 
 if ! "${BIN_DIR}/gh" version; then
   echo "gh cli not configured properly"
