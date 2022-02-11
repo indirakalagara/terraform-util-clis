@@ -6,6 +6,10 @@ Module to download CLIs into local bin directory. This module is primarily inten
 - yq v3
 - yq v4
 - igc
+- kubeseal
+- gh cli
+- glab cli
+- rosa cli
 
 The module outputs the bin directory for use by other modules.
 

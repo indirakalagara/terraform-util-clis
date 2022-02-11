@@ -51,3 +51,7 @@ fi
 if [[ "${CLIS}" =~ glab ]]; then
   "${SCRIPT_DIR}/setup-glab.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
+
+if [[ "${CLIS}" =~ kubeseal ]]; then
+  "${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
