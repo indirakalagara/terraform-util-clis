@@ -13,7 +13,7 @@ jobs:
   verify:
     if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip ci' ) }}
     runs-on: ubuntu-latest
-    container: quay.io/ibmgaragecloud/cli-tools:v0.14
+    container: quay.io/ibmgaragecloud/cli-tools:v0.15
 
     strategy:
       matrix:
@@ -48,9 +48,28 @@ jobs:
           IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
 
 
+  verifyMetadata:
+    runs-on: ubuntu-latest
+
+    env:
+      DIST_DIR: ./dist
+      PUBLISH_BRANCH: gh-pages
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: cloud-native-toolkit/action-module-metadata-create@v1
+        with:
+          strict: true
+          validate: true
+          distDir: ${{ env.DIST_DIR }}
+
+      - name: Print metadata
+        run: cat ${DIST_DIR}/index.yaml
+
   release:
-    #    if: ${{ github.event_name == 'push' }}
-    needs: verify
+    needs: [verify, verifyMetadata]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
 
