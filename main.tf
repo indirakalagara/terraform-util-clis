@@ -11,14 +11,3 @@ data external setup-binaries {
     clis = join(",", var.clis)
   }
 }
-
-resource null_resource setup-binaries {
-  triggers = {
-    always_run = timestamp()
-  }
-
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/setup-binaries.sh '${local.bin_dir}' '${join(",", var.clis)}'"
-  }
-
-}
