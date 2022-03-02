@@ -55,3 +55,7 @@ fi
 if [[ "${CLIS}" =~ kubeseal ]]; then
   "${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
+
+if [[ "${CLIS}" =~ oc ]]; then
+  "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi

@@ -1,7 +1,7 @@
 module "clis" {
   source = "./module"
 
-  clis = ["yq", "jq", "igc", "helm", "argocd", "rosa", "gh", "glab", "kubeseal"]
+  clis = ["yq", "jq", "igc", "helm", "argocd", "rosa", "gh", "glab", "kubeseal", "oc"]
   
 }
 

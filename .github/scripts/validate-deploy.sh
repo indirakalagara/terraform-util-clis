@@ -73,3 +73,10 @@ if ! "${BIN_DIR}/kubeseal" --version; then
 else
   echo "kubeseal cli configured properly"
 fi
+
+if ! "${BIN_DIR}/oc" version; then
+  echo "oc cli not configured properly"
+  exit 1
+else
+  echo "oc cli configured properly"
+fi
