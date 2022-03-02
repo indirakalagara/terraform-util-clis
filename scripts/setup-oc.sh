@@ -16,8 +16,6 @@ fi
 
 URL="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-${FILETYPE}.tar.gz"
 
-echo "Getting oc from ${URL}"
-
 CMD_NAME="oc"
 if [[ "${TYPE}" == "alpine" ]]; then
   CMD_NAME="oc-bin"
@@ -30,4 +28,6 @@ if [[ "${TYPE}" == "alpine" ]]; then
   chmod +x "${DEST_DIR}/oc"
 fi
 
-ln -s "${DEST_DIR}/oc" "${DEST_DIR}/kubectl"
+if [[ ! -f "${DEST_DIR}/kubectl" ]]; then
+  ln -s "${DEST_DIR}/oc" "${DEST_DIR}/kubectl"
+fi

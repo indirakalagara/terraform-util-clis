@@ -2,8 +2,10 @@
 
 SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
-DEST_DIR="$1"
-CLIS="$2"
+INPUT=$(tee)
+
+DEST_DIR=$(echo "${INPUT}" | grep bin_dir | sed -E 's/.*"bin_dir": ?"([^"]*)".*/\1/g')
+CLIS=$(echo "${INPUT}" | grep clis | sed -E 's/.*"clis": ?"([^"]*)".*/\1/g')
 
 TYPE="linux"
 OS=$(uname)
@@ -15,11 +17,9 @@ if [[ "$OS" == "Linux" ]]; then
 elif [[ "$OS" == "Darwin" ]]; then
   TYPE="macos"
 else
-  echo "OS not supported"
+  echo '{"status": "error", "message": "OS not supported"}'
   exit 1
 fi
-
-echo "*** Identified OS: ${TYPE}"
 
 "${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 
@@ -59,3 +59,5 @@ fi
 if [[ "${CLIS}" =~ oc ]] || [[ "${CLIS}" =~ kubectl ]]; then
   "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
+
+echo "{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
