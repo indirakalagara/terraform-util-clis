@@ -29,3 +29,5 @@ if [[ "${TYPE}" == "alpine" ]]; then
   echo "/lib/ld-musl-x86_64.so.1 --library-path /lib ${DEST_DIR}/oc-bin \$@" > ${DEST_DIR}/oc
   chmod +x "${DEST_DIR}/oc"
 fi
+
+ln -s "${DEST_DIR}/oc" "${DEST_DIR}/kubectl"

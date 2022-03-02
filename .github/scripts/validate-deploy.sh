@@ -80,3 +80,10 @@ if ! "${BIN_DIR}/oc" version; then
 else
   echo "oc cli configured properly"
 fi
+
+if ! "${BIN_DIR}/kubectl" version; then
+  echo "kubectl cli not configured properly"
+  exit 1
+else
+  echo "kubectl cli configured properly"
+fi
