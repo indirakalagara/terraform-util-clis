@@ -87,3 +87,10 @@ if ! "${BIN_DIR}/kubectl" version; then
 else
   echo "kubectl cli configured properly"
 fi
+
+if ! "${BIN_DIR}/ibmcloud" version; then
+  echo "ibmcloud cli not configured properly"
+  exit 1
+else
+  echo "ibmcloud cli configured properly"
+fi

@@ -17,7 +17,7 @@ if [[ "$OS" == "Linux" ]]; then
 elif [[ "$OS" == "Darwin" ]]; then
   TYPE="macos"
 else
-  echo '{"status": "error", "message": "OS not supported"}'
+  echo '{"status": "error", "message": "OS not supported"}' >&2
   exit 1
 fi
 
@@ -58,6 +58,10 @@ fi
 
 if [[ "${CLIS}" =~ oc ]] || [[ "${CLIS}" =~ kubectl ]]; then
   "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
+
+if [[ "${CLIS}" =~ ibmcloud ]] || [[ "${CLIS}" =~ kubectl ]]; then
+  "${SCRIPT_DIR}/setup-ibmcloud.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
 
 echo "{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
