@@ -24,6 +24,6 @@ if [[ "${TYPE}" == "alpine" ]] && [[ ! -f /lib/libgcompat.so.0 ]]; then
   chmod +x "${DEST_DIR}/oc"
 fi
 
-if [[ ! -f "${DEST_DIR}/kubectl" ]]; then
-  ln -s "${DEST_DIR}/oc" "${DEST_DIR}/kubectl"
+if [[ ! -e "${DEST_DIR}/kubectl" ]]; then
+  ln -s "${DEST_DIR}/oc" "${DEST_DIR}/kubectl" 1> /dev/null 2> /dev/null || echo -n ''
 fi
