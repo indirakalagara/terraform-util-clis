@@ -74,14 +74,14 @@ else
   echo "kubeseal cli configured properly"
 fi
 
-if ! "${BIN_DIR}/oc" version; then
+if ! "${BIN_DIR}/oc" version --client=true; then
   echo "oc cli not configured properly"
   exit 1
 else
   echo "oc cli configured properly"
 fi
 
-if ! "${BIN_DIR}/kubectl" version; then
+if ! "${BIN_DIR}/kubectl" version --client=true; then
   echo "kubectl cli not configured properly"
   exit 1
 else
