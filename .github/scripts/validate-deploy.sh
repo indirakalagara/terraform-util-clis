@@ -95,9 +95,16 @@ else
   echo "ibmcloud cli configured properly"
 fi
 
-if "#{BIN_DIR}/ibmcloud" plugin show infrastructure-service 1> /dev/null 2> /dev/null; then
+if ! "${BIN_DIR}/ibmcloud" plugin show infrastructure-service 1> /dev/null 2> /dev/null; then
   echo "ibmcloud is plugin not configured properly"
   exit 1
 else
   echo "ibmcloud is plugin configured properly"
+fi
+
+if ! "${BIN_DIR}/ibmcloud" plugin show observe-service 1> /dev/null 2> /dev/null; then
+  echo "ibmcloud ob plugin not configured properly"
+  exit 1
+else
+  echo "ibmcloud ob plugin configured properly"
 fi

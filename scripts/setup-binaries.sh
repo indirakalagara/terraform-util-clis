@@ -68,5 +68,9 @@ if [[ "${CLIS}" =~ ibmcloud-is ]]; then
   "${SCRIPT_DIR}/setup-ibmcloud-plugin.sh" "${DEST_DIR}" infrastructure-service || exit 1
 fi
 
+if [[ "${CLIS}" =~ ibmcloud-ob ]]; then
+  "${SCRIPT_DIR}/setup-ibmcloud-plugin.sh" "${DEST_DIR}" observe-service || exit 1
+fi
+
 
 echo "{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
