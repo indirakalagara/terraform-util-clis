@@ -1,4 +1,5 @@
 name: util-clis
+registryId: cloud-native-toolkit/clis/util
 type: terraform
 description: Module to install clis into local bin directory
 tags:
@@ -8,6 +9,10 @@ tags:
     - yq
     - jq
     - igc
+    - ibmcloud
+    - argocd
+    - oc
+    - kubectl
 versions:
 - platforms: []
   dependencies: []
