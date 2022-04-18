@@ -4,106 +4,113 @@ BIN_DIR=$(cat .bin_dir)
 
 ls -l "${BIN_DIR}"
 
+if [[ ! -f clis-debug.log ]]; then
+  echo "debug log does not exist" >&2
+  exit 1
+fi
+
+cat clis-debug.log
+
 if [[ ! -f "${BIN_DIR}/jq" ]]; then
-  echo "jq not found"
+  echo "jq not found" >&2
   exit 1
 else
   echo "jq cli found"
 fi
 
 if [[ ! -f "${BIN_DIR}/yq3" ]]; then
-  echo "yq3 not found"
+  echo "yq3 not found" >&2
   exit 1
 else
   echo "yq3 cli found"
 fi
 
 if [[ ! -f "${BIN_DIR}/yq4" ]]; then
-  echo "yq4 not found"
+  echo "yq4 not found" >&2
   exit 1
 else
   echo "yq4 cli found"
 fi
 
 if [[ ! -f "${BIN_DIR}/igc" ]]; then
-  echo "igc not found"
+  echo "igc not found" >&2
   exit 1
 else
   echo "igc cli found"
 fi
 
 if [[ ! -f "${BIN_DIR}/helm" ]] || ! "${BIN_DIR}/helm" version --short; then
-  echo "helm not found"
+  echo "helm not found" >&2
   exit 1
 else
   echo "helm cli found"
 fi
 
 if [[ ! -f "${BIN_DIR}/argocd" ]]; then
-  echo "argocd not found"
+  echo "argocd not found" >&2
   exit 1
 else
   echo "argocd cli found"
 fi
 
 if ! "${BIN_DIR}/rosa" version; then
-  echo "rosa cli not configured properly"
+  echo "rosa cli not configured properly" >&2
   exit 1
 else
   echo "rosa cli configured properly"
 fi
 
 if ! "${BIN_DIR}/gh" version; then
-  echo "gh cli not configured properly"
+  echo "gh cli not configured properly" >&2
   exit 1
 else
   echo "gh cli configured properly"
 fi
 
 if ! "${BIN_DIR}/glab" version; then
-  echo "glab cli not configured properly"
+  echo "glab cli not configured properly" >&2
   exit 1
 else
   echo "glab cli configured properly"
 fi
 
 if ! "${BIN_DIR}/kubeseal" --version; then
-  echo "kubeseal cli not configured properly"
+  echo "kubeseal cli not configured properly" >&2
   exit 1
 else
   echo "kubeseal cli configured properly"
 fi
 
 if ! "${BIN_DIR}/oc" version --client=true; then
-  echo "oc cli not configured properly"
+  echo "oc cli not configured properly" >&2
   exit 1
 else
   echo "oc cli configured properly"
 fi
 
 if ! "${BIN_DIR}/kubectl" version --client=true; then
-  echo "kubectl cli not configured properly"
+  echo "kubectl cli not configured properly" >&2
   exit 1
 else
   echo "kubectl cli configured properly"
 fi
 
 if ! "${BIN_DIR}/ibmcloud" version; then
-  echo "ibmcloud cli not configured properly"
+  echo "ibmcloud cli not configured properly" >&2
   exit 1
 else
   echo "ibmcloud cli configured properly"
 fi
 
 if ! "${BIN_DIR}/ibmcloud" plugin show infrastructure-service 1> /dev/null 2> /dev/null; then
-  echo "ibmcloud is plugin not configured properly"
+  echo "ibmcloud is plugin not configured properly" >&2
   exit 1
 else
   echo "ibmcloud is plugin configured properly"
 fi
 
 if ! "${BIN_DIR}/ibmcloud" plugin show observe-service 1> /dev/null 2> /dev/null; then
-  echo "ibmcloud ob plugin not configured properly"
+  echo "ibmcloud ob plugin not configured properly" >&2
   exit 1
 else
   echo "ibmcloud ob plugin configured properly"

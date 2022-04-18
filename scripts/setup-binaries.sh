@@ -4,6 +4,12 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 INPUT=$(tee)
 
+function debug() {
+  echo "${SCRIPT_DIR}: (all) $1" >> clis-debug.log
+}
+
+debug "Input: ${INPUT}"
+
 DEST_DIR=$(echo "${INPUT}" | grep bin_dir | sed -E 's/.*"bin_dir": ?"([^"]*)".*/\1/g')
 CLIS=$(echo "${INPUT}" | grep clis | sed -E 's/.*"clis": ?"([^"]*)".*/\1/g')
 
@@ -20,6 +26,8 @@ else
   echo '{"status": "error", "message": "OS not supported"}' >&2
   exit 1
 fi
+
+debug "Detected os type: ${TYPE}"
 
 "${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 

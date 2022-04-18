@@ -5,7 +5,16 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 DEST_DIR="$1"
 TYPE="$2"
 
+function debug() {
+  CLI_NAME="ibmcloud"
+  echo "${SCRIPT_DIR}: ${CLI_NAME} $1" >> clis-debug.log
+}
+
+debug "Determining release"
+
 RELEASE=$(curl -s "https://api.github.com/repos/IBM-Cloud/ibm-cloud-cli-release/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name')
+
+debug "Found release: ${RELEASE}"
 
 SHORT_RELEASE=$(echo "${RELEASE}" | sed -E "s/v//g")
 
