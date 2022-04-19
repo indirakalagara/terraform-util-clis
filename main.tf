@@ -9,6 +9,10 @@ resource null_resource print {
   }
 }
 
+resource random_id uuid {
+  byte_length = 8
+}
+
 data external setup-binaries {
   depends_on = [null_resource.print]
 
@@ -17,5 +21,6 @@ data external setup-binaries {
   query = {
     bin_dir = local.bin_dir
     clis = join(",", var.clis)
+    uuid = random_id.uuid.b64_std
   }
 }

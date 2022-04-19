@@ -10,6 +10,10 @@ function debug() {
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
 }
 
+if [[ -z "${UUID}" ]]; then
+  UUID="xxxxxx"
+fi
+
 mkdir -p "${DEST_DIR}"
 
 BIN_DIR=$(cd "${DEST_DIR}"; pwd -P)
@@ -26,15 +30,16 @@ if [[ -n "${COMMAND}" ]]; then
   ln -s "${COMMAND}" "${BIN_DIR}/${CLI_NAME}"
   COMMAND="${BIN_DIR}/${CLI_NAME}"
 else
-  TMP_FILE="${BIN_DIR}/${CLI_NAME}.tmp"
+  SEMAPHORE="${BIN_DIR}/${CLI_NAME}.semaphore"
+  TMP_FILE="${BIN_DIR}/${CLI_NAME}-${UUID}.tmp"
 
-  if [[ -f "${TMP_FILE}" ]]; then
-    while [[ -f "${TMP_FILE}" ]]; do
+  if [[ -f "${SEMAPHORE}" ]]; then
+    while [[ -f "${SEMAPHORE}" ]]; do
       debug "CLI is already being installed; waiting 10 seconds"
       sleep 10
     done
   else
-    touch "${TMP_FILE}"
+    echo -n "${UUID}" > "${SEMAPHORE}"
 
     debug "Downloading cli: ${CLI_URL}"
 
@@ -48,6 +53,8 @@ else
     fi
 
     chmod +x "${BIN_DIR}/${CLI_NAME}"
-    rm -f "${TMP_FILE}"
+
+    rm -f "${TMP_FILE}" 1> /dev/null 2> /dev/null
+    rm -f "${SEMAPHORE}" 1> /dev/null 2> /dev/null
   fi
 fi

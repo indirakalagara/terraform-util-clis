@@ -11,6 +11,10 @@ function debug() {
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
 }
 
+if [[ -z "${UUID}" ]]; then
+  UUID="xxxxxx"
+fi
+
 mkdir -p "${DEST_DIR}"
 
 BIN_DIR=$(cd "${DEST_DIR}"; pwd -P)
@@ -23,19 +27,20 @@ fi
 COMMAND=$(command -v "${CLI_NAME}")
 
 if [[ -n "${COMMAND}" ]]; then
-  debug "CLI already available in OS. Creating symlink in bin_dir"
+  debug "CLI already available in PATH. Creating symlink in bin_dir"
   ln -s "${COMMAND}" "${BIN_DIR}/${CLI_NAME}"
   COMMAND="${BIN_DIR}/${CLI_NAME}"
 else
-  TAR_FILE="${BIN_DIR}/${CLI_NAME}.tgz"
+  SEMAPHORE="${BIN_DIR}/${CLI_NAME}.semaphore"
+  TAR_FILE="${BIN_DIR}/${CLI_NAME}-${UUID}.tgz"
 
-  if [[ -f "${TAR_FILE}" ]]; then
-    while [[ -f "${TAR_FILE}" ]]; do
+  if [[ -f "${SEMAPHORE}" ]]; then
+    while [[ -f "${SEMAPHORE}" ]]; do
       debug "CLI is already being installed; waiting 10 seconds"
       sleep 10
     done
   else
-    touch "${TAR_FILE}"
+    echo -n "${UUID}" > "${SEMAPHORE}"
 
     debug "Downloading cli tar file: ${CLI_URL}"
 
@@ -56,7 +61,8 @@ else
       debug "The CLI has already been installed. Nothing to do."
     fi
 
-    rm "${TAR_FILE}"
     chmod +x "${BIN_DIR}/${CLI_NAME}"
+    rm -f "${TAR_FILE}" 1> /dev/null 2> /dev/null
+    rm -f "${SEMAPHORE}" 1> /dev/null 2> /dev/null
   fi
 fi

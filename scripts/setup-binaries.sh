@@ -12,6 +12,7 @@ debug "Input: ${INPUT}"
 
 DEST_DIR=$(echo "${INPUT}" | grep bin_dir | sed -E 's/.*"bin_dir": ?"([^"]*)".*/\1/g')
 CLIS=$(echo "${INPUT}" | grep clis | sed -E 's/.*"clis": ?"([^"]*)".*/\1/g')
+export UUID=$(echo "${INPUT}" | grep uuid | sed -E 's/.*"uuid": ?"([^"]*)".*/\1/g')
 
 TYPE="linux"
 OS=$(uname)

@@ -6,7 +6,7 @@ BIN_DIR="$1"
 export PLUGIN_NAME="$2"
 
 function debug() {
-  echo "${SCRIPT_DIR}: ibmcloud-${PLUGIN_NAME} $1" >> clis-debug.log
+  echo "${SCRIPT_DIR}: (ibmcloud-${PLUGIN_NAME}) $1" >> clis-debug.log
 }
 
 if "${BIN_DIR}/ibmcloud" plugin show "${PLUGIN_NAME}" 1> /dev/null 2> /dev/null; then

@@ -7,7 +7,7 @@ TYPE="$2"
 
 function debug() {
   CLI_NAME="ibmcloud"
-  echo "${SCRIPT_DIR}: ${CLI_NAME} $1" >> clis-debug.log
+  echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
 }
 
 debug "Determining release"
