@@ -48,6 +48,6 @@ else
     fi
 
     chmod +x "${BIN_DIR}/${CLI_NAME}"
-    rm "${TMP_FILE}"
+    rm -f "${TMP_FILE}"
   fi
 fi
