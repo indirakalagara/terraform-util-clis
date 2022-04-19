@@ -9,8 +9,11 @@ resource null_resource print {
   }
 }
 
-resource random_id uuid {
-  byte_length = 8
+resource random_string uuid {
+  length  = 16
+  special = false
+  number  = false
+  upper   = false
 }
 
 data external setup-binaries {
@@ -21,6 +24,6 @@ data external setup-binaries {
   query = {
     bin_dir = local.bin_dir
     clis = join(",", var.clis)
-    uuid = random_id.uuid.b64_std
+    uuid = random_string.uuid.result
   }
 }
