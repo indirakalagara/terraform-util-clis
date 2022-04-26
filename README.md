@@ -14,6 +14,7 @@ Module to download CLIs into local bin directory. This module is primarily inten
 - ibmcloud infrastructure plugin
 - ibmcloud observe plugin
 
+
 The module outputs the bin directory for use by other modules.
 
 **Note:** This module uses an external data source to setup the clis. External data sources have a limitation in terms of real-time feedback of progress. To increase the visibility of what the module is doing, the data source writes logs to `clis-debug.log` in the current working directory.

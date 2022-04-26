@@ -30,6 +30,8 @@ fi
 
 debug "Detected os type: ${TYPE}"
 
+mkdir -p "${DEST_DIR}" || exit 1
+
 "${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 
 if [[ "${CLIS}" =~ igc ]]; then
