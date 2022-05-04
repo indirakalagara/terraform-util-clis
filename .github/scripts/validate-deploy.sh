@@ -115,3 +115,10 @@ if ! "${BIN_DIR}/ibmcloud" plugin show observe-service 1> /dev/null 2> /dev/null
 else
   echo "ibmcloud ob plugin configured properly"
 fi
+
+if ! "${BIN_DIR}/ibmcloud" plugin show kubernetes-service 1> /dev/null 2> /dev/null; then
+  echo "ibmcloud ks plugin not configured properly" >&2
+  exit 1
+else
+  echo "ibmcloud ks plugin configured properly"
+fi

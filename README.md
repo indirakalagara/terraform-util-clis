@@ -2,17 +2,17 @@
 
 Module to download CLIs into local bin directory. This module is primarily intended to be used as a submodule within other modules. The CLIs currently supported are:
 
-- jq
-- yq v3
-- yq v4
-- igc
-- kubeseal
-- gh cli
-- glab cli
-- rosa cli
-- ibmcloud cli
-- ibmcloud infrastructure plugin
-- ibmcloud observe plugin
+- jq (jq)
+- yq v3 and v4 (yq)
+- igc (igc)
+- kubeseal (kubeseal)
+- gh cli (gh)
+- glab cli (glab)
+- rosa cli (rosa)
+- ibmcloud cli (ibmcloud)
+- ibmcloud infrastructure plugin (ibmcloud-is)
+- ibmcloud observe plugin (ibmcloud-ob)
+- ibmcloud kubernetes service plugin (ibmcloud-ks)
 
 
 The module outputs the bin directory for use by other modules.
