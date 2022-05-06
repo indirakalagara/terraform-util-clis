@@ -122,3 +122,10 @@ if ! "${BIN_DIR}/ibmcloud" plugin show kubernetes-service 1> /dev/null 2> /dev/n
 else
   echo "ibmcloud ks plugin configured properly"
 fi
+
+if ! "${BIN_DIR}/kustomize" version; then
+  echo "kustomize cli not configured properly" >&2
+  exit 1
+else
+  echo "kustomize cli configured properly"
+fi

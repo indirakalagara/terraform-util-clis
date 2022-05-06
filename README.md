@@ -9,6 +9,7 @@ Module to download CLIs into local bin directory. This module is primarily inten
 - gh cli (gh)
 - glab cli (glab)
 - rosa cli (rosa)
+- kustomize cli (kustomize)
 - ibmcloud cli (ibmcloud)
 - ibmcloud infrastructure plugin (ibmcloud-is)
 - ibmcloud observe plugin (ibmcloud-ob)

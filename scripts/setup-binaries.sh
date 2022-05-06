@@ -71,6 +71,10 @@ if [[ "${CLIS}" =~ oc ]] || [[ "${CLIS}" =~ kubectl ]]; then
   "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
 
+if [[ "${CLIS}" =~ kustomize ]]; then
+  "${SCRIPT_DIR}/setup-kustomize.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
+
 if [[ "${CLIS}" =~ ibmcloud ]]; then
   "${SCRIPT_DIR}/setup-ibmcloud.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
