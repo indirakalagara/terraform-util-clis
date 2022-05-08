@@ -10,8 +10,11 @@ function debug() {
 }
 
 if "${BIN_DIR}/ibmcloud" plugin show "${PLUGIN_NAME}" 1> /dev/null 2> /dev/null; then
-  debug "Plugin already installed"
-  exit 0
+  UPDATE_AVAILABLE=$("${BIN_DIR}/ibmcloud" plugin list | grep "${PLUGIN_NAME}" | grep -i "update available")
+  if [[ -z "${UPDATE_AVAILABLE}" ]]; then
+    debug "Plugin already installed: ${PLUGIN_NAME}"
+    exit 0
+  fi
 fi
 
 TMP_FILE="${BIN_DIR}/${PLUGIN_NAME}.tmp"
@@ -27,7 +30,13 @@ else
   sleep 1
   if [[ "$(cat "${TMP_FILE}")" == "$0" ]]; then
     debug "Installing plugin"
-    ${BIN_DIR}/ibmcloud plugin install "${PLUGIN_NAME}" 1> /dev/null
+
+    if "${BIN_DIR}/ibmcloud" plugin show "${PLUGIN_NAME}" 1> /dev/null 2> /dev/null; then
+      "${BIN_DIR}/ibmcloud" plugin update "${PLUGIN_NAME}" -f 1> /dev/null
+    else
+      "${BIN_DIR}/ibmcloud" plugin install "${PLUGIN_NAME}" 1> /dev/null
+    fi
+
     rm "${TMP_FILE}"
   else
     while [[ -f "${TMP_FILE}" ]]; do
