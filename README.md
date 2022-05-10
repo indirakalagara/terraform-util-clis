@@ -14,6 +14,7 @@ Module to download CLIs into local bin directory. This module is primarily inten
 - ibmcloud infrastructure plugin (ibmcloud-is)
 - ibmcloud observe plugin (ibmcloud-ob)
 - ibmcloud kubernetes service plugin (ibmcloud-ks)
+- ibmcloud container registry plugin (ibmcloud-cr)
 
 
 The module outputs the bin directory for use by other modules.
