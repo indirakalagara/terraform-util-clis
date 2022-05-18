@@ -4,6 +4,7 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 DEST_DIR="$1"
 TYPE="$2"
+ARCH="$3"
 
 function debug() {
   CLI_NAME="ibmcloud"
@@ -18,9 +19,11 @@ debug "Found release: ${RELEASE}"
 
 SHORT_RELEASE=$(echo "${RELEASE}" | sed -E "s/v//g")
 
-FILETYPE="linux_amd64"
-if [[ "${TYPE}" == "macos" ]]; then
+FILETYPE="linux_${ARCH}"
+if [[ "${TYPE}" == "macos" ]] && [[ ! "${ARCH}" =~ "arm" ]]; then
   FILETYPE="macos"
+elif [[ "${TYPE}" == "macos" ]]; then
+  FILETYPE="macos_${ARCH}"
 fi
 
 URL="https://download.clis.cloud.ibm.com/ibm-cloud-cli/${SHORT_RELEASE}/binaries/IBM_Cloud_CLI_${SHORT_RELEASE}_${FILETYPE}.tgz"

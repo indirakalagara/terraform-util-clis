@@ -4,6 +4,9 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 DEST_DIR="$1"
 TYPE="$2"
+ARCH="$3"
+
+OC_ARCH=$(uname -m)
 
 OC_FILETYPE="linux"
 KUBECTL_FILETYPE="linux"
@@ -12,8 +15,8 @@ if [[ "${TYPE}" == "macos" ]]; then
   KUBECTL_FILETYPE="darwin"
 fi
 
-OC_URL="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-${OC_FILETYPE}.tar.gz"
-KUBECTL_URL="https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/${KUBECTL_FILETYPE}/amd64/kubectl"
+OC_URL="https://mirror.openshift.com/pub/openshift-v4/${OC_ARCH}/clients/ocp/stable/openshift-client-${OC_FILETYPE}.tar.gz"
+KUBECTL_URL="https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/${KUBECTL_FILETYPE}/${ARCH}/kubectl"
 
 CMD_NAME="oc"
 if [[ "${TYPE}" == "alpine" ]] && [[ ! -f /lib/libgcompat.so.0 ]]; then

@@ -27,56 +27,67 @@ else
   echo '{"status": "error", "message": "OS not supported"}' >&2
   exit 1
 fi
-
 debug "Detected os type: ${TYPE}"
+
+ARCH=""
+case $(uname -m) in
+    i386)    ARCH="386" ;;
+    i686)    ARCH="386" ;;
+    x86_64)  ARCH="amd64" ;;
+    aarch64) ARCH="arm64" ;;
+    armv7l)  ARCH="arm" ;;
+    arm)     ARCH="arm" ;;
+    *)       echo "Unable to determine system architecture" >&2; exit 1 ;;
+esac
+debug "Detected architecture: ${ARCH}"
 
 mkdir -p "${DEST_DIR}" || exit 1
 
-"${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+"${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 
 if [[ "${CLIS}" =~ igc ]]; then
-  "${SCRIPT_DIR}/setup-igc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-igc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ yq ]]; then
-  "${SCRIPT_DIR}/setup-yq3.sh" "${DEST_DIR}" "${TYPE}" || exit 1
-  "${SCRIPT_DIR}/setup-yq4.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-yq3.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+  "${SCRIPT_DIR}/setup-yq4.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ helm ]]; then
-  "${SCRIPT_DIR}/setup-helm.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-helm.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ argocd ]]; then
-  "${SCRIPT_DIR}/setup-argocd.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-argocd.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ rosa ]]; then
-  "${SCRIPT_DIR}/setup-rosa.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-rosa.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ gh ]]; then
-  "${SCRIPT_DIR}/setup-gh.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-gh.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ glab ]]; then
-  "${SCRIPT_DIR}/setup-glab.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-glab.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ kubeseal ]]; then
-  "${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ oc ]] || [[ "${CLIS}" =~ kubectl ]]; then
-  "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ kustomize ]]; then
-  "${SCRIPT_DIR}/setup-kustomize.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-kustomize.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ ibmcloud ]]; then
-  "${SCRIPT_DIR}/setup-ibmcloud.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-ibmcloud.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ ibmcloud-is ]]; then

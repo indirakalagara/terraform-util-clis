@@ -4,14 +4,15 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 DEST_DIR="$1"
 TYPE="$2"
+ARCH="$3"
 
 CLI_NAME="helm"
 
-FILENAME="helm-v3.7.2-linux-amd64.tar.gz"
-TGZ_PATH="linux-amd64/helm"
+FILENAME="helm-v3.8.2-linux-${ARCH}.tar.gz"
+TGZ_PATH="linux-${ARCH}/helm"
 if [[ "$TYPE" == "macos" ]]; then
-  FILENAME="helm-v3.7.2-darwin-amd64.tar.gz"
-  TGZ_PATH="darwin-amd64/helm"
+  FILENAME="helm-v3.8.2-darwin-${ARCH}.tar.gz"
+  TGZ_PATH="darwin-${ARCH}/helm"
 fi
 
 URL="https://get.helm.sh/$FILENAME"
