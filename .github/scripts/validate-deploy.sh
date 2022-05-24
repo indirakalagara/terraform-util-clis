@@ -136,3 +136,10 @@ if ! "${BIN_DIR}/kustomize" version; then
 else
   echo "kustomize cli configured properly"
 fi
+
+if [[ ! -f "${BIN_DIR}/gitu" ]]; then
+  echo "gitu cli not found" >&2
+  exit 1
+else
+  echo "gitu cli found"
+fi

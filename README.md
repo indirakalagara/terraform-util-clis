@@ -15,6 +15,7 @@ Module to download CLIs into local bin directory. This module is primarily inten
 - ibmcloud observe plugin (ibmcloud-ob)
 - ibmcloud kubernetes service plugin (ibmcloud-ks)
 - ibmcloud container registry plugin (ibmcloud-cr)
+- universal git client (gitu)
 
 
 The module outputs the bin directory for use by other modules.

@@ -95,6 +95,10 @@ if [[ "${CLIS}" =~ ibmcloud-cr ]]; then
   "${SCRIPT_DIR}/setup-ibmcloud-plugin.sh" "${DEST_DIR}" container-registry || exit 1
 fi
 
+if [[ "${CLIS}" =~ gitu ]]; then
+  "${SCRIPT_DIR}/setup-gitu.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+fi
+
 OUTPUT="{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
 
 debug "Completed: ${OUTPUT}"
