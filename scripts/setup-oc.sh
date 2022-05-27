@@ -20,9 +20,9 @@ if [[ "${TYPE}" == "alpine" ]] && [[ ! -f /lib/libgcompat.so.0 ]]; then
   CMD_NAME="oc-bin"
 fi
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CMD_NAME}" "${OC_URL}" oc
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CMD_NAME}" "${OC_URL}" oc "version --client=true"
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "kubectl" "${KUBECTL_URL}"
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "kubectl" "${KUBECTL_URL}" "version --client=true"
 
 if [[ "${TYPE}" == "alpine" ]] && [[ ! -f /lib/libgcompat.so.0 ]]; then
   echo "/lib/ld-musl-x86_64.so.1 --library-path /lib ${DEST_DIR}/oc-bin \$@" > ${DEST_DIR}/oc

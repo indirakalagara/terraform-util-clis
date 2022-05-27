@@ -16,4 +16,4 @@ fi
 
 URL="https://github.com/bitnami-labs/sealed-secrets/releases/download/${RELEASE}/${FILENAME}.tar.gz"
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" kubeseal "${URL}" kubeseal
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" kubeseal "${URL}" kubeseal --version

@@ -14,4 +14,4 @@ fi
 
 URL="https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.4/$FILENAME"
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CLI_NAME}" "${URL}" "${CLI_NAME}"
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CLI_NAME}" "${URL}" "${CLI_NAME}" version

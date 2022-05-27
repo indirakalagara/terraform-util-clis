@@ -14,4 +14,4 @@ if [[ "${TYPE}" == "macos" ]]; then
   FILENAME="glab_${SHORT_RELEASE}_macOS_x86_64"
 fi
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" glab "https://github.com/profclems/glab/releases/download/${RELEASE}/${FILENAME}.tar.gz" "bin/glab"
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" glab "https://github.com/profclems/glab/releases/download/${RELEASE}/${FILENAME}.tar.gz" "bin/glab" --version

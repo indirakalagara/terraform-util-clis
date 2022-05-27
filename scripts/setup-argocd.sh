@@ -12,4 +12,4 @@ if [[ "$TYPE" == "macos" ]]; then
   URL="https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-darwin-amd64"
 fi
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" argocd "${URL}"
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" argocd "${URL}" "version --client"

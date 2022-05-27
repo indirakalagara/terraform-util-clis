@@ -5,6 +5,7 @@ export SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 DEST_DIR="$1"
 export CLI_NAME="$2"
 CLI_URL="$3"
+TEST_ARGS="${4:---version}"
 
 function debug() {
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
@@ -41,20 +42,33 @@ else
   else
     echo -n "${UUID}" > "${SEMAPHORE}"
 
-    debug "Downloading cli: ${CLI_URL}"
+    count=0
+    while ! command -v "${BIN_DIR}/${CLI_NAME}" 1> /dev/null 2> /dev/null && \
+      ! "${BIN_DIR}/${CLI_NAME}" ${TEST_ARGS} 1> /dev/null 2> /dev/null && \
+      [[ ${count} -lt 3 ]]
+    do
+      count=$((count + 1))
 
-    curl -sLo "${TMP_FILE}" "${CLI_URL}"
+      debug "Downloading cli: ${CLI_URL}"
 
-    if [[ ! -f "${BIN_DIR}/${CLI_NAME}" ]]; then
-      debug "Installing the cli in bin_dir"
-      cp "${TMP_FILE}" "${BIN_DIR}/${CLI_NAME}"
-    else
-      debug "The CLI has already been installed. Nothing to do."
-    fi
+      curl -sLo "${TMP_FILE}" "${CLI_URL}"
 
-    chmod +x "${BIN_DIR}/${CLI_NAME}"
+      if [[ ! -f "${BIN_DIR}/${CLI_NAME}" ]]; then
+        debug "Installing the cli in bin_dir"
+        cp "${TMP_FILE}" "${BIN_DIR}/${CLI_NAME}"
+      else
+        debug "The CLI has already been installed. Nothing to do."
+      fi
+
+      chmod +x "${BIN_DIR}/${CLI_NAME}"
+    done
 
     rm -f "${TMP_FILE}" 1> /dev/null 2> /dev/null
     rm -f "${SEMAPHORE}" 1> /dev/null 2> /dev/null
+
+    if ! "${BIN_DIR}/${CLI_NAME}" ${TEST_ARGS} 1> /dev/null 2> /dev/null; then
+      echo "Error downloading ${CLI_NAME}" >&2
+      exit 1
+    fi
   fi
 fi

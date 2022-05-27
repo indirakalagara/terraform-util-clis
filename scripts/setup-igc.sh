@@ -12,4 +12,4 @@ else
   echo -n "${RELEASE}" > "${DEST_DIR}/.igc-release"
 fi
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" igc "https://github.com/cloud-native-toolkit/ibm-garage-cloud-cli/releases/download/${RELEASE}/igc-${TYPE}"
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" igc "https://github.com/cloud-native-toolkit/ibm-garage-cloud-cli/releases/download/${RELEASE}/igc-${TYPE}" --version

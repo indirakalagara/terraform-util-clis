@@ -11,4 +11,4 @@ else
   URL="https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64"
 fi
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" yq4 "${URL}"
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" yq4 "${URL}" --version

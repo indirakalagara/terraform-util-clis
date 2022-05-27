@@ -11,42 +11,42 @@ fi
 
 cat clis-debug.log
 
-if [[ ! -f "${BIN_DIR}/jq" ]]; then
+if ! "${BIN_DIR}/jq" --version; then
   echo "jq not found" >&2
   exit 1
 else
   echo "jq cli found"
 fi
 
-if [[ ! -f "${BIN_DIR}/yq3" ]]; then
+if ! "${BIN_DIR}/yq3" --version; then
   echo "yq3 not found" >&2
   exit 1
 else
   echo "yq3 cli found"
 fi
 
-if [[ ! -f "${BIN_DIR}/yq4" ]]; then
+if ! "${BIN_DIR}/yq4" --version; then
   echo "yq4 not found" >&2
   exit 1
 else
   echo "yq4 cli found"
 fi
 
-if [[ ! -f "${BIN_DIR}/igc" ]]; then
+if ! "${BIN_DIR}/igc" --version; then
   echo "igc not found" >&2
   exit 1
 else
   echo "igc cli found"
 fi
 
-if [[ ! -f "${BIN_DIR}/helm" ]] || ! "${BIN_DIR}/helm" version --short; then
+if ! "${BIN_DIR}/helm" version --short; then
   echo "helm not found" >&2
   exit 1
 else
   echo "helm cli found"
 fi
 
-if [[ ! -f "${BIN_DIR}/argocd" ]]; then
+if ! "${BIN_DIR}/argocd" version --client; then
   echo "argocd not found" >&2
   exit 1
 else
@@ -137,7 +137,7 @@ else
   echo "kustomize cli configured properly"
 fi
 
-if [[ ! -f "${BIN_DIR}/gitu" ]]; then
+if ! "${BIN_DIR}/gitu" --version; then
   echo "gitu cli not found" >&2
   exit 1
 else

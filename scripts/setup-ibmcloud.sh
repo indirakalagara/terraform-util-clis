@@ -25,6 +25,6 @@ fi
 
 URL="https://download.clis.cloud.ibm.com/ibm-cloud-cli/${SHORT_RELEASE}/binaries/IBM_Cloud_CLI_${SHORT_RELEASE}_${FILETYPE}.tgz"
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" ibmcloud "${URL}" "IBM_Cloud_CLI/ibmcloud"
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" ibmcloud "${URL}" "IBM_Cloud_CLI/ibmcloud" version
 
 "${DEST_DIR}/ibmcloud" config --check-version=false
