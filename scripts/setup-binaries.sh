@@ -110,6 +110,11 @@ if [[ "${CLIS}" =~ gitu ]]; then
   "${SCRIPT_DIR}/setup-gitu.sh" "${DEST_DIR}" "${TYPE}" || exit 1
 fi
 
+if [[ "${CLIS}" =~ openshift-install ]]; then
+  VERSION=$(echo "${CLIS}" | sed -E 's/.*openshift-install-?([0-9]*[.]*[0-9]*[.]*[0-9]*).*/\1/g')
+  "${SCRIPT_DIR}/setup-openshift-install.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" "${VERSION}" || exit 1
+fi
+
 OUTPUT="{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
 
 debug "Completed: ${OUTPUT}"

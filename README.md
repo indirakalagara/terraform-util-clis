@@ -16,6 +16,7 @@ Module to download CLIs into local bin directory. This module is primarily inten
 - ibmcloud kubernetes service plugin (ibmcloud-ks)
 - ibmcloud container registry plugin (ibmcloud-cr)
 - universal git client (gitu)
+- OpenShift Installer (openshift-install-4.x[.y])
 
 
 The module outputs the bin directory for use by other modules.
