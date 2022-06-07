@@ -35,6 +35,7 @@ case $(uname -m) in
     i686)    ARCH="386" ;;
     x86_64)  ARCH="amd64" ;;
     aarch64) ARCH="arm64" ;;
+    arm64)   ARCH="arm64" ;;
     armv7l)  ARCH="arm" ;;
     arm)     ARCH="arm" ;;
     *)       echo "Unable to determine system architecture" >&2; exit 1 ;;
