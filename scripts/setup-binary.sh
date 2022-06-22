@@ -67,7 +67,7 @@ else
     rm -f "${SEMAPHORE}" 1> /dev/null 2> /dev/null
 
     if ! "${BIN_DIR}/${CLI_NAME}" ${TEST_ARGS} 1> /dev/null 2> /dev/null; then
-      echo "Error downloading ${CLI_NAME}" >&2
+      echo "Error downloading ${CLI_NAME} from ${CLI_URL}" >&2
       exit 1
     fi
   fi
