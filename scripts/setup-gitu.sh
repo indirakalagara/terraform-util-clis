@@ -6,11 +6,13 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH="x64"
 
-if [[ -f "${DEST_DIR}/.gitu-release" ]]; then
-  RELEASE=$(cat "${DEST_DIR}/.gitu-release")
-else
-  RELEASE=$(curl -s "https://api.github.com/repos/cloud-native-toolkit/git-client/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name')
-  echo -n "${RELEASE}" > "${DEST_DIR}/.gitu-release"
+export PATH="${DEST_DIR}:${PATH}"
+
+RELEASE=$(curl -s "https://api.github.com/repos/cloud-native-toolkit/git-client/releases/latest" | jq -r '.tag_name // empty')
+
+if [[ -z "${RELEASE}" ]]; then
+  echo "gitu release not found" >&2
+  exit 1
 fi
 
 "${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" gitu "https://github.com/cloud-native-toolkit/git-client/releases/download/${RELEASE}/gitu-${TYPE}-${ARCH}" --version

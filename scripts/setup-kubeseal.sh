@@ -6,7 +6,12 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH="$3"
 
-RELEASE=$(curl -s "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name')
+RELEASE=$(curl -s "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name // empty')
+
+if [[ -z "${RELEASE}" ]]; then
+  echo "kubeseal release not found" >&2
+  exit 1
+fi
 
 SHORT_RELEASE=$(echo "${RELEASE}" | sed -E "s/v//g")
 

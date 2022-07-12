@@ -21,4 +21,4 @@ fi
 
 URL="https://github.com/stedolan/jq/releases/download/jq-1.6/${FILENAME}"
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" jq "${URL}" --version
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" jq "${URL}" --version "1.6"

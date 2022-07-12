@@ -6,6 +6,8 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH_BASE="$3"
 
+export PATH="${DEST_DIR}:${PATH}"
+
 ARCH=""
 case "${ARCH_BASE}" in
     386)     ARCH="i386" ;;
@@ -13,7 +15,12 @@ case "${ARCH_BASE}" in
     *)       ARCH="${ARCH_BASE}" ;;
 esac
 
-RELEASE=$(curl -s "https://api.github.com/repos/profclems/glab/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name')
+RELEASE=$(curl -s "https://api.github.com/repos/profclems/glab/releases/latest" | jq -r '.tag_name // empty')
+
+if [[ -z "${RELEASE}" ]]; then
+  echo "glab release not found" >&2
+  exit 1
+fi
 
 SHORT_RELEASE=$(echo "${RELEASE}" | sed -E "s/v//g")
 

@@ -6,6 +6,7 @@ DEST_DIR="$1"
 export CLI_NAME="$2"
 CLI_URL="$3"
 TEST_ARGS="${4:---version}"
+VERSION_MATCH="$5"
 
 function debug() {
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
@@ -24,7 +25,11 @@ if command -v "${BIN_DIR}/${CLI_NAME}" 1> /dev/null 2> /dev/null; then
   exit 0
 fi
 
-COMMAND=$(command -v "${CLI_NAME}")
+if command -v "${CLI_NAME}" 1> /dev/null 2> /dev/null && [[ -n "${VERSION_MATCH}" ]] && [[ $("${CLI_NAME}" --version) =~ ${VERSION_MATCH} ]]; then
+  COMMAND=$(command -v "${CLI_NAME}")
+else
+  COMMAND=$(command -v "${CLI_NAME}")
+fi
 
 if [[ -n "${COMMAND}" ]]; then
   debug "CLI already available in PATH. Creating symlink in bin_dir"

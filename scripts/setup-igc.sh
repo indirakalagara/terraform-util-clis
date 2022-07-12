@@ -5,11 +5,13 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 DEST_DIR="$1"
 TYPE="$2"
 
-if [[ -f "${DEST_DIR}/.igc-release" ]]; then
-  RELEASE=$(cat "${DEST_DIR}/.igc-release")
-else
-  RELEASE=$(curl -s "https://api.github.com/repos/cloud-native-toolkit/ibm-garage-cloud-cli/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name')
-  echo -n "${RELEASE}" > "${DEST_DIR}/.igc-release"
+export PATH="${DEST_DIR}:${PATH}"
+
+RELEASE=$(curl -s "https://api.github.com/repos/cloud-native-toolkit/ibm-garage-cloud-cli/releases/latest" | jq -r '.tag_name // empty')
+
+if [[ -z "${RELEASE}" ]]; then
+  echo "igc release not found" >&2
+  exit 1
 fi
 
 "${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" igc "https://github.com/cloud-native-toolkit/ibm-garage-cloud-cli/releases/download/${RELEASE}/igc-${TYPE}" --version

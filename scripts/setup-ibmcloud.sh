@@ -11,9 +11,16 @@ function debug() {
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
 }
 
+export PATH="${DEST_DIR}:${PATH}"
+
 debug "Determining release"
 
-RELEASE=$(curl -s "https://api.github.com/repos/IBM-Cloud/ibm-cloud-cli-release/releases/latest" | "${DEST_DIR}/jq" -r '.tag_name')
+RELEASE=$(curl -s "https://api.github.com/repos/IBM-Cloud/ibm-cloud-cli-release/releases/latest" | jq -r '.tag_name // empty')
+
+if [[ -z "${RELEASE}" ]]; then
+  echo "ibmcloud release not found" >&2
+  exit 1
+fi
 
 debug "Found release: ${RELEASE}"
 
