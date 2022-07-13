@@ -6,12 +6,17 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH="$3"
 
+CLI_NAME="ibmcloud"
+
 function debug() {
-  CLI_NAME="ibmcloud"
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
 }
 
 export PATH="${DEST_DIR}:${PATH}"
+
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
+  exit 0
+fi
 
 debug "Determining release"
 
@@ -35,6 +40,6 @@ fi
 
 URL="https://download.clis.cloud.ibm.com/ibm-cloud-cli/${SHORT_RELEASE}/binaries/IBM_Cloud_CLI_${SHORT_RELEASE}_${FILETYPE}.tgz"
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" ibmcloud "${URL}" "IBM_Cloud_CLI/ibmcloud" version
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CLI_NAME}" "${URL}" "IBM_Cloud_CLI/ibmcloud" version
 
 "${DEST_DIR}/ibmcloud" config --check-version=false

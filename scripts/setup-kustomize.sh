@@ -8,6 +8,10 @@ ARCH="$3"
 
 CLI_NAME="kustomize"
 
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
+  exit 0
+fi
+
 FILENAME="kustomize_v4.5.4_linux_${ARCH}.tar.gz"
 if [[ "$TYPE" == "macos" ]]; then
   FILENAME="kustomize_v4.5.4_darwin_${ARCH}.tar.gz"

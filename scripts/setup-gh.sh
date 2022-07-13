@@ -6,7 +6,13 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH="$3"
 
+CLI_NAME="gh"
+
 export PATH="${DEST_DIR}:${PATH}"
+
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
+  exit 0
+fi
 
 RELEASE=$(curl -s "https://api.github.com/repos/cli/cli/releases/latest" | jq -r '.tag_name // empty')
 
@@ -22,4 +28,4 @@ if [[ "${TYPE}" == "macos" ]]; then
   FILENAME="gh_${SHORT_RELEASE}_macOS_${ARCH}"
 fi
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" gh "https://github.com/cli/cli/releases/download/${RELEASE}/${FILENAME}.tar.gz" "${FILENAME}/bin/gh" --version
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CLI_NAME}" "https://github.com/cli/cli/releases/download/${RELEASE}/${FILENAME}.tar.gz" "${FILENAME}/bin/gh" --version

@@ -6,7 +6,13 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH="$3"
 
+CLI_NAME="argocd"
+
 export PATH="${DEST_DIR}:${PATH}"
+
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
+  exit 0
+fi
 
 VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | jq -r '.tag_name // empty')
 
@@ -20,4 +26,4 @@ if [[ "$TYPE" == "macos" ]]; then
   URL="https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-darwin-${ARCH}"
 fi
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" argocd "${URL}" "version --client"
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "${CLI_NAME}" "${URL}" "version --client"

@@ -6,6 +6,8 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH="$3"
 
+CLI_NAME="oc"
+
 OC_ARCH=$(uname -m)
 
 OC_FILETYPE="linux"
@@ -16,14 +18,23 @@ if [[ "${TYPE}" == "macos" ]]; then
 fi
 
 OC_URL="https://mirror.openshift.com/pub/openshift-v4/${OC_ARCH}/clients/ocp/stable/openshift-client-${OC_FILETYPE}.tar.gz"
-KUBECTL_URL="https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/${KUBECTL_FILETYPE}/${ARCH}/kubectl"
 
-CMD_NAME="oc"
-if [[ "${TYPE}" == "alpine" ]] && [[ ! -f /lib/libgcompat.so.0 ]]; then
-  CMD_NAME="oc-bin"
+
+if ! "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" oc; then
+  CMD_NAME="oc"
+  if [[ "${TYPE}" == "alpine" ]] && [[ ! -f /lib/libgcompat.so.0 ]]; then
+    CMD_NAME="oc-bin"
+  fi
+
+  "${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CMD_NAME}" "${OC_URL}" oc "version --client=true"
 fi
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CMD_NAME}" "${OC_URL}" oc "version --client=true"
+
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" kubectl; then
+  exit 0
+fi
+
+KUBECTL_URL="https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/${KUBECTL_FILETYPE}/${ARCH}/kubectl"
 
 "${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "kubectl" "${KUBECTL_URL}" "version --client=true"
 

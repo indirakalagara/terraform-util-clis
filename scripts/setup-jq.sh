@@ -10,6 +10,12 @@ DEST_DIR="$1"
 OS="$2"
 ARCH="$3"
 
+CLI_NAME="jq"
+
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}" "1.6"; then
+  exit 0
+fi
+
 if [[ "${ARCH}" =~ ^arm ]]; then
   debug "ARM not currently supported for jq. Trying amd64"
 fi
@@ -21,4 +27,4 @@ fi
 
 URL="https://github.com/stedolan/jq/releases/download/jq-1.6/${FILENAME}"
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" jq "${URL}" --version "1.6"
+"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "${CLI_NAME}" "${URL}" --version "1.6"

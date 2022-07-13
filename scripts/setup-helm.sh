@@ -8,6 +8,10 @@ ARCH="$3"
 
 CLI_NAME="helm"
 
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
+  exit 0
+fi
+
 FILENAME="helm-v3.8.2-linux-${ARCH}.tar.gz"
 TGZ_PATH="linux-${ARCH}/helm"
 if [[ "$TYPE" == "macos" ]]; then

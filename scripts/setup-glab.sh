@@ -6,7 +6,13 @@ DEST_DIR="$1"
 TYPE="$2"
 ARCH_BASE="$3"
 
+CLI_NAME="glab"
+
 export PATH="${DEST_DIR}:${PATH}"
+
+if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
+  exit 0
+fi
 
 ARCH=""
 case "${ARCH_BASE}" in
@@ -29,4 +35,4 @@ if [[ "${TYPE}" == "macos" ]]; then
   FILENAME="glab_${SHORT_RELEASE}_macOS_${ARCH}"
 fi
 
-"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" glab "https://github.com/profclems/glab/releases/download/${RELEASE}/${FILENAME}.tar.gz" "bin/glab" --version
+"${SCRIPT_DIR}/setup-binary-from-tgz.sh" "${DEST_DIR}" "${CLI_NAME}" "https://github.com/profclems/glab/releases/download/${RELEASE}/${FILENAME}.tar.gz" "bin/glab" --version
