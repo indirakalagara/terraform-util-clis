@@ -3,7 +3,7 @@
 SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 DEST_DIR="$1"
-TYPE="$1"
+TYPE="$2"
 ARCH="$3"
 
 if [[ "$TYPE" == "macos" ]]; then
