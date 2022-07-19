@@ -10,6 +10,10 @@ function debug() {
   echo "${SCRIPT_DIR}: (${CLI_NAME}) $1" >> clis-debug.log
 }
 
+mkdir -p "${DEST_DIR}"
+
+BIN_DIR=$(cd "${DEST_DIR}"; pwd -P)
+
 if command -v "${BIN_DIR}/${CLI_NAME}" 1> /dev/null 2> /dev/null; then
   debug "CLI already provided in bin_dir"
   exit 0
