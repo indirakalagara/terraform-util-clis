@@ -108,7 +108,7 @@ if [[ "${CLIS}" =~ ibmcloud-cr ]]; then
 fi
 
 if [[ "${CLIS}" =~ gitu ]]; then
-  "${SCRIPT_DIR}/setup-gitu.sh" "${DEST_DIR}" "${TYPE}" || exit 1
+  "${SCRIPT_DIR}/setup-gitu.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ openshift-install ]]; then
