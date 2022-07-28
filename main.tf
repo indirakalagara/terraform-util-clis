@@ -12,7 +12,7 @@ resource null_resource print {
 resource random_string uuid {
   length  = 16
   special = false
-  number  = false
+  numeric = false
   upper   = false
 }
 
