@@ -47,6 +47,7 @@ mkdir -p "${DEST_DIR}" || exit 1
 "${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 "${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 "${SCRIPT_DIR}/setup-igc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+"${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 
 if [[ "${CLIS}" =~ yq ]]; then
   "${SCRIPT_DIR}/setup-yq3.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
@@ -71,10 +72,6 @@ fi
 
 if [[ "${CLIS}" =~ glab ]]; then
   "${SCRIPT_DIR}/setup-glab.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
-fi
-
-if [[ "${CLIS}" =~ oc ]] || [[ "${CLIS}" =~ kubectl ]]; then
-  "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
 if [[ "${CLIS}" =~ kustomize ]]; then
