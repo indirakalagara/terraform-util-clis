@@ -14,7 +14,7 @@ if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
   exit 0
 fi
 
-RELEASE=$(curl -s "https://api.github.com/repos/cloud-native-toolkit/git-client/releases/latest" | jq -r '.tag_name // empty')
+RELEASE=$(curl -sI "https://github.com/cloud-native-toolkit/git-client/releases/latest" | grep "location:" | sed -E "s~.*/tag/([a-z0-9.-]+).*~\1~g")
 
 if [[ -z "${RELEASE}" ]]; then
   echo "gitu release not found" >&2

@@ -14,7 +14,7 @@ if "${SCRIPT_DIR}/setup-existing.sh" "${DEST_DIR}" "${CLI_NAME}"; then
   exit 0
 fi
 
-VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | jq -r '.tag_name // empty')
+VERSION=$(curl -sI "https://github.com/argoproj/argo-cd/releases/latest" | grep "location:" | sed -E "s~.*/tag/([a-z0-9.-]+).*~\1~g")
 
 if [[ -z "${VERSION}" ]]; then
   echo "argocd release not found" >&2

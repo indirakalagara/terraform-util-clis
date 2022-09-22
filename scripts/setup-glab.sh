@@ -21,7 +21,7 @@ case "${ARCH_BASE}" in
     *)       ARCH="${ARCH_BASE}" ;;
 esac
 
-RELEASE=$(curl -s "https://api.github.com/repos/profclems/glab/releases/latest" | jq -r '.tag_name // empty')
+RELEASE=$(curl -sI "https://github.com/profclems/glab/releases/latest" | grep "location:" | sed -E "s~.*/tag/([a-z0-9.-]+).*~\1~g")
 
 if [[ -z "${RELEASE}" ]]; then
   echo "glab release not found" >&2
