@@ -4,6 +4,7 @@ SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
 
 DEST_DIR="$1"
 TYPE="$2"
+ARCH="$3"
 CLI_NAME="igc"
 
 export PATH="${DEST_DIR}:${PATH}"
@@ -19,4 +20,8 @@ if [[ -z "${RELEASE}" ]]; then
   exit 1
 fi
 
-"${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "${CLI_NAME}" "https://github.com/cloud-native-toolkit/ibm-garage-cloud-cli/releases/download/${RELEASE}/igc-${TYPE}" --version
+if [[ "${ARCH}" == "amd64" ]]; then
+  "${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "${CLI_NAME}" "https://github.com/cloud-native-toolkit/ibm-garage-cloud-cli/releases/download/${RELEASE}/igc-${TYPE}" --version
+else
+  "${SCRIPT_DIR}/setup-binary.sh" "${DEST_DIR}" "${CLI_NAME}" "https://github.com/cloud-native-toolkit/ibm-garage-cloud-cli/releases/download/${RELEASE}/igc-${TYPE}-${ARCH}" --version
+fi
