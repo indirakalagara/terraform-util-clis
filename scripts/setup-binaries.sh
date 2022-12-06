@@ -107,6 +107,10 @@ if [[ "${CLIS}" =~ openshift-install ]]; then
   "${SCRIPT_DIR}/setup-openshift-install.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" "${VERSION}" || exit 1
 fi
 
+if [[ "${CLIS}" =~ rclone ]]; then
+  "${SCRIPT_DIR}/setup-rclone.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+fi
+
 OUTPUT="{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
 
 debug "Completed: ${OUTPUT}"
