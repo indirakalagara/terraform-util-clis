@@ -44,10 +44,10 @@ debug "Detected architecture: ${ARCH}"
 
 mkdir -p "${DEST_DIR}" || exit 1
 
-"${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
-"${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
-"${SCRIPT_DIR}/setup-igc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
-"${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+# "${SCRIPT_DIR}/setup-jq.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+# "${SCRIPT_DIR}/setup-kubeseal.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+# "${SCRIPT_DIR}/setup-igc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
+# "${SCRIPT_DIR}/setup-oc.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 
 if [[ "${CLIS}" =~ yq ]]; then
   "${SCRIPT_DIR}/setup-yq3.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
