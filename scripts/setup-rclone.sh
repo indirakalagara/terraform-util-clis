@@ -7,11 +7,11 @@ ARCH_BASE="$3"
 
 CLI_NAME="rclone"
 
-FILENAME="rclone-v1.60.1-linux-${ARCH}.zip"
+FILENAME="rclone-v1.60.1-linux-${ARCH_BASE}.zip"
 
 #arc for rclone binaries - arm64 and amd64
 if [[ "${TYPE}" == "macos" ]]; then
-  FILENAME="rclone-v1.60.1_macOS_${ARCH}.zip"
+  FILENAME="rclone-v1.60.1_macOS_${ARCH_BASE}.zip"
 fi
 
 

@@ -18,7 +18,6 @@ resource random_string uuid {
 
 data external setup-binaries {
   depends_on = [null_resource.print]
-
   program = ["bash", "${path.module}/scripts/setup-binaries.sh"]
 
   query = {

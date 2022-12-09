@@ -111,6 +111,7 @@ if [[ "${CLIS}" =~ rclone ]]; then
   "${SCRIPT_DIR}/setup-rclone.sh" "${DEST_DIR}" "${TYPE}" "${ARCH}" || exit 1
 fi
 
+
 OUTPUT="{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
 
 debug "Completed: ${OUTPUT}"
