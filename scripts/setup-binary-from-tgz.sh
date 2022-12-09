@@ -63,8 +63,14 @@ else
         debug "Unpacking ${CLI_PATH} from tar file ${TAR_FILE}"
         tar xzf "${TAR_FILE}" "${CLI_PATH}"
         debug "Installing the cli in bin_dir"
-        cp "${CLI_PATH}" "${BIN_DIR}/${CLI_NAME}"
-        rm "${CLI_PATH}"
+        if [[ "${CLI_NAME}" == "rclone" ]]; then
+          cp "${CLI_PATH}/${CLI_NAME}" "${BIN_DIR}/${CLI_NAME}"
+          rm -rf "${CLI_PATH}"
+        else
+          cp "${CLI_PATH}" "${BIN_DIR}/${CLI_NAME}"
+          rm "${CLI_PATH}"
+        fi
+        
       else
         debug "The CLI has already been installed. Nothing to do."
       fi

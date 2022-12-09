@@ -112,6 +112,7 @@ if [[ "${CLIS}" =~ rclone ]]; then
 fi
 
 
+
 OUTPUT="{\"status\": \"success\", \"message\": \"success\", \"type\": \"${type}\", \"bin_dir\": \"${DEST_DIR}\"}"
 
 debug "Completed: ${OUTPUT}"
